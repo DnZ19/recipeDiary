@@ -6,6 +6,9 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeDiaryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RecipeDiaryService {
 
@@ -36,5 +39,11 @@ public class RecipeDiaryService {
         return rddto;
 
     }
+
+    public List<RecipeDiary> getAllDiaries() {
+        return (List<RecipeDiary>) diaryRepos.findAll();
+    }
+
+
 
 }

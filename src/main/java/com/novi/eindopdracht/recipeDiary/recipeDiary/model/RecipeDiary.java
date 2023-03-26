@@ -12,6 +12,7 @@ public class RecipeDiary {
     private Long recipeDiaryId;
     private String name;
 
+
     public RecipeDiary() {
     }
 
