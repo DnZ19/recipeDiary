@@ -8,6 +8,7 @@ public class NutritionDetailsDto {
     public int fat;
     public  int protein;
     public  int carbs;
+    public String errorMessage;
 
     //public Long recipeId;
 

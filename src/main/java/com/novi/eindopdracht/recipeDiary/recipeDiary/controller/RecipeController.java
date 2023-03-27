@@ -30,8 +30,14 @@ public class RecipeController {
     @PostMapping
     public ResponseEntity<Object> createRecipe(@Valid @RequestBody RecipeDto rdto, BindingResult br){
 
-        ResponseEntity<Object> sb = getObjectResponseEntity(br);
-        if (sb != null) return sb;
+        if (br.hasFieldErrors()){
+            StringBuilder sb = new StringBuilder();
+            for (FieldError fe : br.getFieldErrors()){
+                sb.append(fe.getField() + ": ");
+                sb.append(fe.getDefaultMessage() + "\n");
+            }
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        }
 
         Long recipeId = recipeService.createRecipe(rdto);
         rdto.recipeId = recipeId;
@@ -42,11 +48,11 @@ public class RecipeController {
 
     }
 
-    static ResponseEntity<Object> getObjectResponseEntity(BindingResult br) {
-        ResponseEntity<Object> sb = NutritionDetailsController.getObjectResponseEntity(br);
-        if (sb != null) return sb;
-        return null;
-    }
+//    static ResponseEntity<Object> getObjectResponseEntity(BindingResult br) {
+//        ResponseEntity<Object> sb = NutritionDetailsController.getObjectResponseEntity(br);
+//        if (sb != null) return sb;
+//        return null;
+//    }
 
     @GetMapping("/{recipeId}")
     public ResponseEntity<RecipeDto> getRecipe(@PathVariable Long recipeId){

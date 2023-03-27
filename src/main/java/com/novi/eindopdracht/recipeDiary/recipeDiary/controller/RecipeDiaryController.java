@@ -27,8 +27,14 @@ public class RecipeDiaryController {
     @PostMapping
     public ResponseEntity<Object> createRecipeDiary(@Valid @RequestBody RecipeDiaryDto rddto, BindingResult br){
 
-        ResponseEntity<Object> sb = RecipeController.getObjectResponseEntity(br);
-        if (sb != null) return sb;
+        if (br.hasFieldErrors()){
+            StringBuilder sb = new StringBuilder();
+            for (FieldError fe : br.getFieldErrors()){
+                sb.append(fe.getField() + ": ");
+                sb.append(fe.getDefaultMessage() + "\n");
+            }
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        }
 
         Long recipeDiaryId = rdService.createRecipeDiary(rddto);
         rddto.recipeDiaryId = recipeDiaryId;

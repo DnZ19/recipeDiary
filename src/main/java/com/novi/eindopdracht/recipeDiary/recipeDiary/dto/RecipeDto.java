@@ -29,4 +29,5 @@ public class RecipeDto {
     public Long nutritionDetailsId;
 
 
+    public String errorMessage;
 }

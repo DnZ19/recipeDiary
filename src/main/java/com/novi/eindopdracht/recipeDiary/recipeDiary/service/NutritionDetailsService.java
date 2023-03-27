@@ -31,16 +31,29 @@ public class NutritionDetailsService {
     }
 
     public NutritionDetailsDto getNutritionDetails(Long nutritionDetailsId){
-        NutritionDetails nd = nutritionRepos.findById(nutritionDetailsId).orElseThrow(() -> new ResourceNotFoundException("Nutrition item not found"));
 
-        NutritionDetailsDto nddto = new NutritionDetailsDto();
-        nddto.nutritionDetailsId = nd.getNutritionDetailsId();
-        nddto.calories = nd.getCalories();
-        nddto.fat = nd.getFat();
-        nddto.protein = nd.getProtein();
-        nddto.carbs = nd.getCarbs();
+        try{
+            NutritionDetails nd = nutritionRepos.findById(nutritionDetailsId).orElseThrow(() -> new ResourceNotFoundException("Nutrition item not found"));
 
-        return nddto;
+            NutritionDetailsDto nddto = new NutritionDetailsDto();
+            nddto.nutritionDetailsId = nd.getNutritionDetailsId();
+            nddto.calories = nd.getCalories();
+            nddto.fat = nd.getFat();
+            nddto.protein = nd.getProtein();
+            nddto.carbs = nd.getCarbs();
+
+            return nddto;
+
+        } catch (ResourceNotFoundException exeption) {
+            // log the error message
+            System.err.println(exeption.getMessage());
+
+            // return an error response to the browser
+            NutritionDetailsDto errorResponse = new NutritionDetailsDto();
+            errorResponse.errorMessage = exeption.getMessage();
+            return errorResponse;
+        }
+
 
     }
 

@@ -23,4 +23,11 @@ insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, p
 insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, photos, tags, rating, recipe_source, category_name, nutrition_details_Id)
 values (nextval('recipes_seq'), 'Frikadellen Fritatta', 'Fritatta de dellen!!', '1 hour', 5, 'Put red unions in there for extra flavour', '{url1, url2}', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 2);
 
+-- CREATE SEQUENCE ingredient_seq START 1;
+ALTER SEQUENCE ingredient_seq RESTART WITH 1;
 
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Tomatoes', 1, 'Kilo', 'Vegetable');
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Onion', 0.2, 'Kilo', 'Vegetable');
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Leak', 0.2, 'Kilo', 'Vegetable');
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Other1', 1, 'Kilo', 'Vegetable');
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Other2', 1, 'Kilo', 'Vegetable');
