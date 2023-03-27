@@ -16,7 +16,7 @@ public class Recipe {
     private Long recipeId;
     private String name;
     private String instructions;
-    private int prepTime;
+    private String prepTime;
     private int servings;
     private String notes;
     private List<String> photos;
@@ -24,6 +24,10 @@ public class Recipe {
     private int rating;
     private String recipeSource;
     private String categoryName;
+
+    @OneToOne
+    @JoinColumn(name = "nutrition_Details_Id")
+    private NutritionDetails nutritionDetails;
 
     public Long getRecipeId() {
         return recipeId;
@@ -49,11 +53,11 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public int getPrepTime() {
+    public String getPrepTime() {
         return prepTime;
     }
 
-    public void setPrepTime(int prepTime) {
+    public void setPrepTime(String prepTime) {
         this.prepTime = prepTime;
     }
 
@@ -111,5 +115,13 @@ public class Recipe {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public NutritionDetails getNutritionDetails() {
+        return nutritionDetails;
+    }
+
+    public void setNutritionDetails(NutritionDetails nutritionDetails) {
+        this.nutritionDetails = nutritionDetails;
     }
 }

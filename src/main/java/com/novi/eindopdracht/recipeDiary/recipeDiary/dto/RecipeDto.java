@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -14,7 +15,7 @@ public class RecipeDto {
     @NotBlank
     public String instructions;
 
-    public int prepTime;
+    public String prepTime;
     public int servings;
 
     @Size(min=3, max=255)
@@ -24,5 +25,8 @@ public class RecipeDto {
     public int rating;
     public String recipeSource;
     public String categoryName;
+
+    public Long nutritionDetailsId;
+
 
 }
