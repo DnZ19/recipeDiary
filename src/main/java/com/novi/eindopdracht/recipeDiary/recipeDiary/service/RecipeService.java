@@ -44,24 +44,34 @@ public class RecipeService {
     }
 
     public RecipeDto getRecipe(Long recipeId){
-        Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+        try{
+            Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
 
-        RecipeDto rdto = new RecipeDto();
-        rdto.recipeId = r.getRecipeId();
-        rdto.name = r.getName();
-        rdto.instructions = r.getInstructions();
-        rdto.prepTime = r.getPrepTime();
-        rdto.servings = r.getServings();
-        rdto.notes = r.getNotes();
-        rdto.photos = r.getPhotos();
-        rdto.tags = r.getTags();
-        rdto.rating = r.getRating();
-        rdto.recipeSource = r.getRecipeSource();
-        rdto.categoryName = r.getCategoryName();
+            RecipeDto rdto = new RecipeDto();
+            rdto.recipeId = r.getRecipeId();
+            rdto.name = r.getName();
+            rdto.instructions = r.getInstructions();
+            rdto.prepTime = r.getPrepTime();
+            rdto.servings = r.getServings();
+            rdto.notes = r.getNotes();
+            rdto.photos = r.getPhotos();
+            rdto.tags = r.getTags();
+            rdto.rating = r.getRating();
+            rdto.recipeSource = r.getRecipeSource();
+            rdto.categoryName = r.getCategoryName();
 
-        rdto.nutritionDetailsId = r.getNutritionDetails().getNutritionDetailsId();
+            rdto.nutritionDetailsId = r.getNutritionDetails().getNutritionDetailsId();
 
-        return rdto;
+            return rdto;
+
+        } catch (ResourceNotFoundException exception) {
+            System.err.println(exception.getMessage());
+
+            RecipeDto errorResponse = new RecipeDto();
+            errorResponse.errorMessage = exception.getMessage();
+            return errorResponse;
+        }
+
 
     }
 
