@@ -1,24 +1,32 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.NutritionDetailsRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RecipeService {
 
     private final RecipeRepository rRepos;
     private final NutritionDetailsRepository nutritionDetailsRepository;
+    private final IngredientRepository ingredientRepository;
 
 
-    public RecipeService(RecipeRepository rRepos, NutritionDetailsRepository nutritionDetailsRepository) {
+    public RecipeService(RecipeRepository rRepos, NutritionDetailsRepository nutritionDetailsRepository, IngredientRepository ingredientRepository) {
         this.rRepos = rRepos;
         this.nutritionDetailsRepository = nutritionDetailsRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public Long createRecipe(RecipeDto rdto){
@@ -88,4 +96,29 @@ public class RecipeService {
 
         return nddto;
     }
+
+
+
+        public List<IngredientDto> getRecipeIngredients(Long recipeId) {
+
+            Recipe recipe = rRepos.findById(recipeId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
+
+            List<Ingredient> ingredients = recipe.getIngredients();
+
+            List<IngredientDto> ingredientDtos = new ArrayList<>();
+            for (Ingredient ingredient : ingredients) {
+                IngredientDto ingredientDto = new IngredientDto();
+                ingredientDto.setIngredientId(ingredient.getIngredientId());
+                ingredientDto.setIngredientName(ingredient.getIngredientName());
+                ingredientDto.setQuantity(ingredient.getQuantity());
+                ingredientDto.setUnit(ingredient.getUnit());
+                ingredientDto.setCategoryName(ingredient.getCategoryName());
+                ingredientDtos.add(ingredientDto);
+            }
+
+            return ingredientDtos;
+        }
+
+
 }

@@ -1,6 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -28,6 +28,24 @@ public class RecipeDto {
 
     public Long nutritionDetailsId;
 
+    public List<Ingredient> ingredients;
+    public List<Long> ingredientIds;
 
     public String errorMessage;
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Long> getIngredientIds() {
+        return ingredientIds;
+    }
+
+    public void setIngredientIds(List<Long> ingredientIds) {
+        this.ingredientIds = ingredientIds;
+    }
 }

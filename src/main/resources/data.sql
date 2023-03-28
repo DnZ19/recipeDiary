@@ -26,8 +26,9 @@ values (nextval('recipes_seq'), 'Frikadellen Fritatta', 'Fritatta de dellen!!', 
 -- CREATE SEQUENCE ingredient_seq START 1;
 ALTER SEQUENCE ingredient_seq RESTART WITH 1;
 
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Tomatoes', 1, 'Kilo', 'Vegetable');
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Onion', 0.2, 'Kilo', 'Vegetable');
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Leak', 0.2, 'Kilo', 'Vegetable');
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Other1', 1, 'Kilo', 'Vegetable');
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name ) values (nextval('ingredient_seq'), 'Other2', 1, 'Kilo', 'Vegetable');
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'Tomatoes', 1, 'Kilo', 'Vegetable', 1);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'Onion', 0.2, 'Kilo', 'Vegetable', 1);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'Leak', 0.2, 'Kilo', 'Vegetable', 1);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'Other1', 1, 'Kilo', 'Vegetable', 1);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'Other2', 1, 'Kilo', 'Vegetable', 1);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (nextval('ingredient_seq'), 'frikadel', 2, 'stuks', 'frituur', 2);

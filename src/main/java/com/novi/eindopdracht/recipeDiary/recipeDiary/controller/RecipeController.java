@@ -1,18 +1,24 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.NutritionDetailsService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeService;
 import jakarta.validation.Valid;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("recipes")
@@ -48,14 +54,9 @@ public class RecipeController {
 
     }
 
-//    static ResponseEntity<Object> getObjectResponseEntity(BindingResult br) {
-//        ResponseEntity<Object> sb = NutritionDetailsController.getObjectResponseEntity(br);
-//        if (sb != null) return sb;
-//        return null;
-//    }
-
     @GetMapping("/{recipeId}")
     public ResponseEntity<RecipeDto> getRecipe(@PathVariable Long recipeId){
+
         RecipeDto rdto = recipeService.getRecipe(recipeId);
 
         return ResponseEntity.ok(rdto);
@@ -68,6 +69,31 @@ public class RecipeController {
         return ResponseEntity.ok(nutritionDetailsDto);
 
     }
+
+    @GetMapping("/{recipeId}/ingredients")
+    public ResponseEntity<List<IngredientDto>> getRecipeIngredients(@PathVariable Long recipeId) {
+        List<IngredientDto> ingredientDtos = recipeService.getRecipeIngredients(recipeId);
+        return ResponseEntity.ok(ingredientDtos);
+    }
+
+    // les materiaal...........
+
+
+//    @GetMapping("/hello")
+//    public String sayHello(){
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth.getPrincipal() instanceof UserDetails){
+//            UserDetails ud = (UserDetails) auth.getPrincipal();
+//
+//            return "Hello " + ud.getUsername();
+//        }
+//
+//        return "Hello stranger";
+//
+//    }
+
+
 
 
 

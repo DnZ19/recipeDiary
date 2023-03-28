@@ -6,4 +6,7 @@ public class ResourceNotFoundException extends RuntimeException{
         super(message);
     }
 
+    public ResourceNotFoundException(String recipe, String id, Long recipeId) {
+
+    }
 }
