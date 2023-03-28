@@ -45,18 +45,6 @@ public class NutritionDetailsController {
 
     }
 
-//    static ResponseEntity<Object> getObjectResponseEntity(BindingResult br) {
-//        if (br.hasFieldErrors()){
-//            StringBuilder sb = new StringBuilder();
-//            for (FieldError fe : br.getFieldErrors()){
-//                sb.append(fe.getField() + ": ");
-//                sb.append(fe.getDefaultMessage() + "\n");
-//            }
-//            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
-//        }
-//        return null;
-//    }
-
     @GetMapping("/{nutritionDetailsId}")
     public ResponseEntity<NutritionDetailsDto> getNutritionDetails(@PathVariable Long nutritionDetailsId){
         NutritionDetailsDto nddto = nDetService.getNutritionDetails(nutritionDetailsId);

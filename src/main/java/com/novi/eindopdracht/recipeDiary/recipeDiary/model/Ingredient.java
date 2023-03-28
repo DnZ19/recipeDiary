@@ -15,6 +15,11 @@ public class Ingredient {
     private String unit;
     private String categoryName;
 
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
+
+
     public Long getIngredientId() {
         return ingredientId;
     }
@@ -53,5 +58,13 @@ public class Ingredient {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

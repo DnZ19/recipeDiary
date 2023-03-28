@@ -44,10 +44,9 @@ public class IngredientService {
             return idto;
 
         } catch (ResourceNotFoundException exception) {
-            // log the error message
+
             System.err.println(exception.getMessage());
 
-            // return an error response to the browser
             IngredientDto errorResponse = new IngredientDto();
             errorResponse.errorMessage = exception.getMessage();
             return errorResponse;

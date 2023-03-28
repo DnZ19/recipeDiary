@@ -6,7 +6,6 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeDiaryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,20 +42,15 @@ public class RecipeDiaryService {
 
             System.err.println(exception.getMessage());
 
-            // return an error response to the browser
             RecipeDiaryDto errorResponse = new RecipeDiaryDto();
             errorResponse.errorMessage = exception.getMessage();
             return errorResponse;
         }
-
-
-
     }
 
-    public List<RecipeDiary> getAllDiaries() {
+    public List<RecipeDiary> getAllDiaries()
+    {
         return (List<RecipeDiary>) diaryRepos.findAll();
     }
-
-
 
 }

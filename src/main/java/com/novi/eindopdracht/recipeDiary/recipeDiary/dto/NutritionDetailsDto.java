@@ -10,6 +10,6 @@ public class NutritionDetailsDto {
     public  int carbs;
     public String errorMessage;
 
-    //public Long recipeId;
+    public Long recipeId;
 
 }
