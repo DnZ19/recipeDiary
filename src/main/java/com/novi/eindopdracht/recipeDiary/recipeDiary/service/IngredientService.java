@@ -24,6 +24,7 @@ public class IngredientService {
         i.setQuantity(idto.quantity);
         i.setUnit(idto.unit);
         i.setCategoryName(idto.categoryName);
+        i.setErrorMessage(idto.errorMessage);
 
         iRepos.save(i);
 
@@ -31,15 +32,20 @@ public class IngredientService {
     }
 
     public IngredientDto getIngredient(Long ingredientId){
+
+        String errorMessage;
+
         try{
 
             Ingredient i = iRepos.findById(ingredientId).orElseThrow(()-> new ResourceNotFoundException("Ingredient not found"));
 
             IngredientDto idto = new IngredientDto();
+            idto.ingredientId = i.getIngredientId();
             idto.ingredientName = i.getIngredientName();
             idto.quantity = i.getQuantity();
             idto.unit = i.getUnit();
             idto.categoryName = i.getCategoryName();
+            idto.errorMessage = i.getErrorMessage();
 
             return idto;
 
@@ -49,10 +55,11 @@ public class IngredientService {
 
             IngredientDto errorResponse = new IngredientDto();
             errorResponse.errorMessage = exception.getMessage();
+
+
+
             return errorResponse;
         }
-
-
 
     }
 

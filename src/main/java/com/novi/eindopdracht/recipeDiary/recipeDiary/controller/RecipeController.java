@@ -3,6 +3,7 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.ShoppingListDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.NutritionDetailsService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeService;
 import jakarta.validation.Valid;
@@ -76,6 +77,14 @@ public class RecipeController {
         return ResponseEntity.ok(ingredientDtos);
     }
 
+    @GetMapping("/{recipeId}/shopping_list")
+    public ResponseEntity<ShoppingListDto> getRecipeShoppingList(@PathVariable Long recipeId){
+        ShoppingListDto shoppingListDto = recipeService.getRecipeShoppingList(recipeId);
+        return ResponseEntity.ok(shoppingListDto);
+    }
+
+
+
     // les materiaal...........
 
 
@@ -92,11 +101,6 @@ public class RecipeController {
 //        return "Hello stranger";
 //
 //    }
-
-
-
-
-
 
 
 

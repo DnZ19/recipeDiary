@@ -14,6 +14,7 @@ public class Ingredient {
     private float quantity;
     private String unit;
     private String categoryName;
+    private String errorMessage;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
@@ -66,5 +67,13 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

@@ -3,13 +3,16 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.ShoppingListDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.NutritionDetailsRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.ShoppingListRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,15 +24,17 @@ public class RecipeService {
     private final RecipeRepository rRepos;
     private final NutritionDetailsRepository nutritionDetailsRepository;
     private final IngredientRepository ingredientRepository;
+    private final ShoppingListRepository shoppingListRepository;
 
 
-    public RecipeService(RecipeRepository rRepos, NutritionDetailsRepository nutritionDetailsRepository, IngredientRepository ingredientRepository) {
+    public RecipeService(RecipeRepository rRepos, NutritionDetailsRepository nutritionDetailsRepository, IngredientRepository ingredientRepository, ShoppingListRepository shoppingListRepository) {
         this.rRepos = rRepos;
         this.nutritionDetailsRepository = nutritionDetailsRepository;
         this.ingredientRepository = ingredientRepository;
+        this.shoppingListRepository = shoppingListRepository;
     }
 
-    public Long createRecipe(RecipeDto rdto){
+    public Long createRecipe(RecipeDto rdto) {
 
         Recipe r = new Recipe();
         r.setName(rdto.name);
@@ -46,13 +51,16 @@ public class RecipeService {
         NutritionDetails nutritionDetails = nutritionDetailsRepository.findById(rdto.nutritionDetailsId).get();
         r.setNutritionDetails(nutritionDetails);
 
+        ShoppingList shoppingList = shoppingListRepository.findById(rdto.shoppingListId).get();
+        r.setShoppingList(shoppingList);
+
         rRepos.save(r);
 
         return r.getRecipeId();
     }
 
-    public RecipeDto getRecipe(Long recipeId){
-        try{
+    public RecipeDto getRecipe(Long recipeId) {
+        try {
             Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
 
             RecipeDto rdto = new RecipeDto();
@@ -69,6 +77,7 @@ public class RecipeService {
             rdto.categoryName = r.getCategoryName();
 
             rdto.nutritionDetailsId = r.getNutritionDetails().getNutritionDetailsId();
+            rdto.shoppingListId = r.getShoppingList().getShoppingListId();
 
             return rdto;
 
@@ -85,40 +94,57 @@ public class RecipeService {
 
     public NutritionDetailsDto getRecipeNutrition(Long recipeId) {
 
-        NutritionDetails nd = nutritionDetailsRepository.findById(recipeId).orElseThrow(()-> new ResourceNotFoundException("Nutrition not found"));
+        Recipe recipe = rRepos.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
 
-        NutritionDetailsDto nddto = new NutritionDetailsDto();
-        nddto.nutritionDetailsId = nd.getNutritionDetailsId();
-        nddto.fat = nd.getFat();
-        nddto.carbs = nd.getCarbs();
-        nddto.protein = nd.getProtein();
-        nddto.calories = nd.getCalories();
+        NutritionDetails nutritionDetails = recipe.getNutritionDetails();
 
-        return nddto;
+        NutritionDetailsDto nutritionDetailsDto = new NutritionDetailsDto();
+        nutritionDetailsDto.setNutritionDetailsId(nutritionDetails.getNutritionDetailsId());
+        nutritionDetailsDto.setFat(nutritionDetails.getFat());
+        nutritionDetailsDto.setCarbs(nutritionDetails.getCarbs());
+        nutritionDetailsDto.setProtein(nutritionDetails.getProtein());
+        nutritionDetailsDto.setCalories(nutritionDetails.getCalories());
+
+        return nutritionDetailsDto;
     }
 
+    public List<IngredientDto> getRecipeIngredients(Long recipeId) {
 
+        Recipe recipe = rRepos.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
 
-        public List<IngredientDto> getRecipeIngredients(Long recipeId) {
+        List<Ingredient> ingredients = recipe.getIngredients();
 
-            Recipe recipe = rRepos.findById(recipeId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
-
-            List<Ingredient> ingredients = recipe.getIngredients();
-
-            List<IngredientDto> ingredientDtos = new ArrayList<>();
-            for (Ingredient ingredient : ingredients) {
-                IngredientDto ingredientDto = new IngredientDto();
-                ingredientDto.setIngredientId(ingredient.getIngredientId());
-                ingredientDto.setIngredientName(ingredient.getIngredientName());
-                ingredientDto.setQuantity(ingredient.getQuantity());
-                ingredientDto.setUnit(ingredient.getUnit());
-                ingredientDto.setCategoryName(ingredient.getCategoryName());
-                ingredientDtos.add(ingredientDto);
-            }
-
-            return ingredientDtos;
+        List<IngredientDto> ingredientDtos = new ArrayList<>();
+        for (Ingredient ingredient : ingredients) {
+            IngredientDto ingredientDto = new IngredientDto();
+            ingredientDto.setIngredientId(ingredient.getIngredientId());
+            ingredientDto.setIngredientName(ingredient.getIngredientName());
+            ingredientDto.setQuantity(ingredient.getQuantity());
+            ingredientDto.setUnit(ingredient.getUnit());
+            ingredientDto.setCategoryName(ingredient.getCategoryName());
+            ingredientDtos.add(ingredientDto);
         }
+
+        return ingredientDtos;
+    }
+
+    public ShoppingListDto getRecipeShoppingList(Long recipeId) {
+
+        Recipe recipe = rRepos.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
+
+        ShoppingList shoppingList = recipe.getShoppingList();
+
+        ShoppingListDto shoppingListDto = new ShoppingListDto();
+        shoppingListDto.setShoppingListId(shoppingList.getShoppingListId());
+        shoppingListDto.setItems(shoppingList.getItems());
+
+        return shoppingListDto;
+
+    }
+
 
 
 }

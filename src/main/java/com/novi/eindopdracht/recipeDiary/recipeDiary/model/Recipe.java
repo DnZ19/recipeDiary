@@ -32,6 +32,9 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     private List<Ingredient> ingredients;
 
+    @OneToOne
+    @JoinColumn(name = "shopping_List_Id")
+    private ShoppingList shoppingList;
 
     public Long getRecipeId() {
         return recipeId;
@@ -135,5 +138,13 @@ public class Recipe {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public ShoppingList getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(ShoppingList shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

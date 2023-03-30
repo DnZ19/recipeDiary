@@ -11,7 +11,12 @@ public class ShoppingList {
 
     private Long shoppingListId;
     // list van maken?
-    private Enum items;
+    private String items;
+
+    @OneToOne(mappedBy = "shoppingList")
+    private Recipe recipe;
+
+
 
     public Long getShoppingListId() {
         return shoppingListId;
@@ -21,16 +26,24 @@ public class ShoppingList {
         this.shoppingListId = shoppingListId;
     }
 
-    public Enum getItems() {
+    public String getItems() {
         return items;
     }
 
-    public void setItems(Enum items) {
+    public void setItems(String items) {
         this.items = items;
     }
 
     // vabnuit de service gecreeerd...is dit wel juist?
     public void setShoppingList(ShoppingList shoppingList) {
 
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
