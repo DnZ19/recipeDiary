@@ -37,6 +37,14 @@ public class SecurityConfig {
 
         manager.createUser(ud1);
 
+        UserDetails ud3 = User
+                .withUsername("Fred")
+                .password(encoder.encode("abcd"))
+                .roles("USER")
+                .build();
+
+        manager.createUser(ud3);
+
         UserDetails ud2 = User
                 .withUsername("John")
                 .password(encoder.encode("5678"))
@@ -59,10 +67,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/secret").hasRole("ADMIN")
-                .requestMatchers("/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/**").hasRole("USER")
                 .anyRequest().denyAll()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .csrf().disable();
 
         return http.build();
 

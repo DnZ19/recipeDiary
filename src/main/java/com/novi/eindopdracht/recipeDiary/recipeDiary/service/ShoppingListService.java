@@ -20,8 +20,7 @@ public class ShoppingListService {
         ShoppingList s = new ShoppingList();
         s.setItems(sldto.items);
 
-        ShoppingList shoppingList = shoppingRepo.findById(sldto.shoppingListId).get();
-        s.setShoppingList(shoppingList);
+        // make an entry to save the ingredients (as list items?)
 
         shoppingRepo.save(s);
 

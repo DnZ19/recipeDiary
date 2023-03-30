@@ -49,6 +49,15 @@ public class IngredientController {
         IngredientDto idto = iService.getIngredient(ingredientId);
 
         return ResponseEntity.ok(idto);
+
+//        if (idto.getErrorMessage().isEmpty()){
+//            return ResponseEntity.ok(idto);
+//        } else {
+//            return idto.getErrorMessage();
+//        }
+
+
+
     }
 
 }

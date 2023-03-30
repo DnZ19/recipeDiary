@@ -7,7 +7,6 @@ public class IngredientDto {
     public float quantity;
     public String unit;
     public String categoryName;
-
     public String errorMessage;
 
     public Long getIngredientId() {
@@ -48,5 +47,13 @@ public class IngredientDto {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
