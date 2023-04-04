@@ -1,9 +1,7 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.ShoppingListDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.*;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.NutritionDetailsService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeService;
 import jakarta.validation.Valid;
@@ -19,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("recipes")
@@ -77,31 +78,24 @@ public class RecipeController {
         return ResponseEntity.ok(ingredientDtos);
     }
 
+
     @GetMapping("/{recipeId}/shopping_list")
-    public ResponseEntity<ShoppingListDto> getRecipeShoppingList(@PathVariable Long recipeId){
+    public ResponseEntity<ShoppingListDto> getRecipeShoppingList(@PathVariable Long recipeId) {
         ShoppingListDto shoppingListDto = recipeService.getRecipeShoppingList(recipeId);
+
+        List<IngredientsForShoppingListDto> ingredientsForShoppingListDtos = new ArrayList<>();
+        for (IngredientsForShoppingListDto ingredientsForShoppingListDto : shoppingListDto.getIngredients()) {
+            IngredientsForShoppingListDto ingredientsForShoppingListDto1 = new IngredientsForShoppingListDto();
+            ingredientsForShoppingListDto1.setIngredientId(ingredientsForShoppingListDto.getIngredientId());
+            ingredientsForShoppingListDto1.setIngredientName(ingredientsForShoppingListDto.getIngredientName());
+            ingredientsForShoppingListDto1.setQuantity(ingredientsForShoppingListDto.getQuantity());
+            ingredientsForShoppingListDto1.setUnit(ingredientsForShoppingListDto.getUnit());
+            ingredientsForShoppingListDtos.add(ingredientsForShoppingListDto1);
+        }
+        shoppingListDto.setIngredients(ingredientsForShoppingListDtos);
+
         return ResponseEntity.ok(shoppingListDto);
+
     }
-
-
-
-    // les materiaal...........
-
-
-//    @GetMapping("/hello")
-//    public String sayHello(){
-//
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth.getPrincipal() instanceof UserDetails){
-//            UserDetails ud = (UserDetails) auth.getPrincipal();
-//
-//            return "Hello " + ud.getUsername();
-//        }
-//
-//        return "Hello stranger";
-//
-//    }
-
-
 
 }

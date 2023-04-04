@@ -2,6 +2,8 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "shopping_list")
 public class ShoppingList {
@@ -10,13 +12,18 @@ public class ShoppingList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long shoppingListId;
-    // list van maken?
-    private String items;
+    private String shoppingListName;
 
     @OneToOne(mappedBy = "shoppingList")
     private Recipe recipe;
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "ingredient_shopping_list",
+            joinColumns = @JoinColumn(name = "shopping_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
+    private List<Ingredient> ingredients;
 
     public Long getShoppingListId() {
         return shoppingListId;
@@ -26,17 +33,12 @@ public class ShoppingList {
         this.shoppingListId = shoppingListId;
     }
 
-    public String getItems() {
-        return items;
+    public String getShoppingListName() {
+        return shoppingListName;
     }
 
-    public void setItems(String items) {
-        this.items = items;
-    }
-
-    // vabnuit de service gecreeerd...is dit wel juist?
-    public void setShoppingList(ShoppingList shoppingList) {
-
+    public void setShoppingListName(String shoppingListName) {
+        this.shoppingListName = shoppingListName;
     }
 
     public Recipe getRecipe() {
@@ -45,5 +47,13 @@ public class ShoppingList {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

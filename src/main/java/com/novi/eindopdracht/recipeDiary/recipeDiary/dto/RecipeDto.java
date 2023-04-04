@@ -1,7 +1,5 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -32,6 +30,8 @@ public class RecipeDto {
     public Long shoppingListId;
 
     public String errorMessage;
+
+
 
 
 }

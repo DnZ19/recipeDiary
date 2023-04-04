@@ -45,9 +45,9 @@ public class ShoppingListController {
 
     @GetMapping("/{shoppingListId}")
     public  ResponseEntity<ShoppingListDto> getShoppingList(@PathVariable Long shoppingListId){
-        ShoppingListDto slDto = slService.getShoppingList(shoppingListId);
+        ShoppingListDto sLdto = (ShoppingListDto) slService.getShoppingList(shoppingListId);
 
-        return ResponseEntity.ok(slDto);
+        return ResponseEntity.ok(sLdto);
     }
 
 

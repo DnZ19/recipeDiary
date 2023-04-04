@@ -1,6 +1,9 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "ingredient")
@@ -9,7 +12,6 @@ public class Ingredient {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long ingredientId;
-
     private String ingredientName;
     private float quantity;
     private String unit;
@@ -17,9 +19,11 @@ public class Ingredient {
     private String errorMessage;
 
     @ManyToOne
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipeId")
     private Recipe recipe;
 
+    @ManyToMany(mappedBy = "ingredients")
+    private List<ShoppingList> shoppingList;
 
     public Long getIngredientId() {
         return ingredientId;
@@ -75,5 +79,13 @@ public class Ingredient {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public List<ShoppingList> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(List<ShoppingList> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

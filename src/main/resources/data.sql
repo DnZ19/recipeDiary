@@ -18,9 +18,9 @@ insert into nutrition_details(nutrition_details_Id, calories, fat, protein, carb
 -- CREATE SEQUENCE shopping_List_seq START 1;
 -- ALTER SEQUENCE shopping_List_seq RESTART WITH 1;
 
-insert into shopping_List(shopping_list_id, items) values (30001, 'test item 1');
-insert into shopping_List(shopping_list_id, items) values (30002, 'test item 2');
-insert into shopping_List(shopping_list_id, items) values (30003, 'test item 3');
+insert into shopping_List(shopping_list_id, shopping_List_Name) values (30001, 'Tomato Soup');
+insert into shopping_List(shopping_list_id, shopping_List_Name) values (30002, 'Frikadellen Frittatatatata');
+insert into shopping_List(shopping_list_id, shopping_List_Name) values (30003, 'Spinazie Ijs');
 
 -- CREATE SEQUENCE recipes_seq START 1;
 -- ALTER SEQUENCE recipes_seq RESTART WITH 1;
@@ -35,13 +35,20 @@ insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, p
 values (40003, 'Groente Ijs', 'spinazie ijs', '1 hour', 5, 'Put red unions in there for extra flavour', '{url1, url2}', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20003, 30003);
 
 
--- CREATE SEQUENCE ingredient_seq START 1;
--- ALTER SEQUENCE ingredient_seq RESTART WITH 1;
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50001, 'Tomatoes', 1, 'Kilo', 'Vegetable', 40001);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50002, 'Onion', 0.2, 'Kilo', 'Vegetable', 40001);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50003, 'Leak', 0.2, 'Kilo', 'Vegetable', 40001);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50004, 'Other1', 1, 'Kilo', 'Vegetable', 40001);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50005, 'Other2', 1, 'Kilo', 'Vegetable', 40001);
+insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50006, 'frikadel', 2, 'stuks', 'frituur', 40002);
 
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40001, 'Tomatoes', 1, 'Kilo', 'Vegetable', 40001);
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40002, 'Onion', 0.2, 'Kilo', 'Vegetable', 40001);
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40003, 'Leak', 0.2, 'Kilo', 'Vegetable', 40001);
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40004, 'Other1', 1, 'Kilo', 'Vegetable', 40001);
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40005, 'Other2', 1, 'Kilo', 'Vegetable', 40001);
-insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id ) values (40006, 'frikadel', 2, 'stuks', 'frituur', 40002);
+insert into ingredient_shopping_list(shopping_list_id, ingredient_id) values (30001, 50001);
+insert into ingredient_shopping_list(shopping_list_id, ingredient_id) values (30001, 50002);
+insert into ingredient_shopping_list(shopping_list_id, ingredient_id) values (30001, 50003);
+insert into ingredient_shopping_list(shopping_list_id, ingredient_id) values (30001, 50004);
+insert into ingredient_shopping_list(shopping_list_id, ingredient_id) values (30001, 50005);
+
+
+
+
 
