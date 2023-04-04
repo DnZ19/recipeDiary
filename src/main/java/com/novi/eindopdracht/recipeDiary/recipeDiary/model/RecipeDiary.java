@@ -16,17 +16,8 @@ public class RecipeDiary {
     public RecipeDiary() {
     }
 
-    public RecipeDiary(Long recipeDiaryId, String name) {
-        this.recipeDiaryId = recipeDiaryId;
-        this.name = name;
-    }
-
     public Long getRecipeDiaryId() {
         return recipeDiaryId;
-    }
-
-    public void setRecipeDiaryId(Long recipeDiaryId) {
-        this.recipeDiaryId = recipeDiaryId;
     }
 
     public String getName() {

@@ -23,10 +23,6 @@ public class NutritionDetails {
         return nutritionDetailsId;
     }
 
-    public void setNutritionDetailsId(Long nutritionDetailsId) {
-        this.nutritionDetailsId = nutritionDetailsId;
-    }
-
     public int getCalories() {
         return calories;
     }
@@ -59,11 +55,4 @@ public class NutritionDetails {
         this.carbs = carbs;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }

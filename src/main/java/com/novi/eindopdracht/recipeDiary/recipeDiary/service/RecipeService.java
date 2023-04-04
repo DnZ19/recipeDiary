@@ -1,14 +1,8 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.ShoppingListDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.*;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.*;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.NutritionDetailsRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
@@ -16,7 +10,9 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.ShoppingListRepo
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
@@ -124,13 +120,16 @@ public class RecipeService {
             ingredientDto.setQuantity(ingredient.getQuantity());
             ingredientDto.setUnit(ingredient.getUnit());
             ingredientDto.setCategoryName(ingredient.getCategoryName());
+
+            ingredientDto.setRecipeId(ingredient.getRecipe().getRecipeId());
             ingredientDtos.add(ingredientDto);
         }
 
         return ingredientDtos;
     }
 
-    public ShoppingListDto getRecipeShoppingList(Long recipeId) {
+
+    public ShoppingListDto getRecipeShoppingList(Long recipeId){
 
         Recipe recipe = rRepos.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe", "id", recipeId));
@@ -139,12 +138,35 @@ public class RecipeService {
 
         ShoppingListDto shoppingListDto = new ShoppingListDto();
         shoppingListDto.setShoppingListId(shoppingList.getShoppingListId());
-        shoppingListDto.setItems(shoppingList.getItems());
+        shoppingListDto.setShoppingListName(shoppingList.getShoppingListName());
+
+        List<IngredientsForShoppingListDto> ingredientsForShoppingListDtos = new ArrayList<>();
+        for (Ingredient i : shoppingList.getIngredients()){
+            IngredientsForShoppingListDto ingredientsForShoppingListDto = new IngredientsForShoppingListDto();
+            ingredientsForShoppingListDto.setIngredientName(i.getIngredientName());
+            ingredientsForShoppingListDto.setQuantity(i.getQuantity());
+            ingredientsForShoppingListDto.setUnit(i.getUnit());
+            ingredientsForShoppingListDtos.add(ingredientsForShoppingListDto);
+        }
+
+        shoppingListDto.setIngredients(ingredientsForShoppingListDtos);
 
         return shoppingListDto;
 
     }
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

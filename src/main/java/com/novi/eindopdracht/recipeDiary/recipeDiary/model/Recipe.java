@@ -40,10 +40,6 @@ public class Recipe {
         return recipeId;
     }
 
-    public void setRecipeId(Long recipeId) {
-        this.recipeId = recipeId;
-    }
-
     public String getName() {
         return name;
     }
@@ -134,10 +130,6 @@ public class Recipe {
 
     public List<Ingredient> getIngredients() {
         return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public ShoppingList getShoppingList() {
