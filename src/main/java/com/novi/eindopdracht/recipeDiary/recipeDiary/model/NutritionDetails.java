@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,10 +14,11 @@ public class NutritionDetails {
 
     private int calories;
     private int fat;
-    private  int protein;
-    private  int carbs;
+    private int protein;
+    private int carbs;
 
     @OneToOne(mappedBy = "nutritionDetails")
+    @JsonIgnore
     private Recipe recipe;
 
     public Long getNutritionDetailsId() {
@@ -55,4 +57,11 @@ public class NutritionDetails {
         this.carbs = carbs;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 }

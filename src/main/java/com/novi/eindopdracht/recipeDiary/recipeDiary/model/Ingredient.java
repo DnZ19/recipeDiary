@@ -20,6 +20,7 @@ public class Ingredient {
 
     @ManyToOne
     @JoinColumn(name = "recipeId")
+    @JsonIgnore
     private Recipe recipe;
 
     @ManyToMany(mappedBy = "ingredients")

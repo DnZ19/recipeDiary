@@ -33,10 +33,13 @@ public class ShoppingListService {
         ShoppingList sl = new ShoppingList();
         sl.setShoppingListName(slDto.shoppingListName);
 
-        Recipe recipe = rRepos.findById(slDto.recipeId).get();
+        Long recipeId = slDto.getRecipeId() != null ? slDto.getRecipeId() : 1L;
+        Recipe recipe = rRepos.findById(recipeId).get();
         sl.setRecipe(recipe);
 
-        Ingredient ingredient = iRepos.findById(slDto.getIngredientId()).get();
+        Long ingredientId = slDto.getIngredientId() != null ? slDto.getIngredientId() : 1L;
+        Ingredient ingredient = iRepos.findById(ingredientId).get();
+
         List<Ingredient> ingredientList = new ArrayList<>();
         ingredientList.add(ingredient);
         sl.setIngredients(ingredientList);

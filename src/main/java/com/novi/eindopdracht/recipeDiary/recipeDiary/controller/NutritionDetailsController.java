@@ -41,7 +41,7 @@ public class NutritionDetailsController {
 
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + nutritionDetailsId).toUriString());
 
-        return ResponseEntity.created(uri).body(nutritionDetailsId);
+        return ResponseEntity.created(uri).body(nddto);
 
     }
 
