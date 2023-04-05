@@ -3,14 +3,15 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.NutritionDetailsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.NutritionDetailsRepository;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NutritionDetailsService {
 
     private final NutritionDetailsRepository nutritionRepos;
-
 
     public NutritionDetailsService(NutritionDetailsRepository nutritionRepos) {
         this.nutritionRepos = nutritionRepos;
@@ -44,13 +45,13 @@ public class NutritionDetailsService {
 
             return nddto;
 
-        } catch (ResourceNotFoundException exeption) {
+        } catch (ResourceNotFoundException exception) {
             // log the error message
-            System.err.println(exeption.getMessage());
+            System.err.println(exception.getMessage());
 
             // return an error response to the browser
             NutritionDetailsDto errorResponse = new NutritionDetailsDto();
-            errorResponse.errorMessage = exeption.getMessage();
+            errorResponse.errorMessage = exception.getMessage();
             return errorResponse;
         }
 

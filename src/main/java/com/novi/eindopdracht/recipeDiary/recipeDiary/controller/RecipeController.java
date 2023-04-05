@@ -56,6 +56,25 @@ public class RecipeController {
 
     }
 
+    @PutMapping("{recipeId}/{nutritionDetailsId}")
+    public ResponseEntity<RecipeDto> linkNutritionToRecipe(@PathVariable("recipeId") Long recipeId, @PathVariable("nutritionDetailsId" ) Long nutritionDetailsId){
+
+        RecipeDto rdto = recipeService.linkNutritionToRecipe(recipeId, nutritionDetailsId);
+
+        return ResponseEntity.ok(rdto);
+
+    }
+
+    @PutMapping("{recipeId}/ingredients/{ingredientId}")
+    public ResponseEntity<RecipeDto> linkIngredientsToRecipe(@PathVariable("recipeId") Long recipeId, @PathVariable("ingredientId") Long ingredientId){
+
+        RecipeDto rdto = recipeService.linkIngredientsToRecipe(recipeId, ingredientId);
+
+        return ResponseEntity.ok(rdto);
+
+    }
+
+
     @GetMapping("/{recipeId}")
     public ResponseEntity<RecipeDto> getRecipe(@PathVariable Long recipeId){
 

@@ -4,6 +4,7 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,13 @@ public class IngredientService {
         i.setCategoryName(idto.categoryName);
         i.setErrorMessage(idto.errorMessage);
 
-        Recipe recipe = rRepos.findById(idto.recipeId).get();
-        i.setRecipe(recipe);
+//        Recipe recipe = rRepos.findById(idto.recipeId).get();
+//        i.setRecipe(recipe);
+
+        if (idto.recipeId != null) {
+            Recipe recipe = rRepos.findById(idto.recipeId).get();
+            i.setRecipe(recipe);
+        }
 
         iRepos.save(i);
 

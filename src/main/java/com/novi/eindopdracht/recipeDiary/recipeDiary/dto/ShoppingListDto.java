@@ -11,7 +11,6 @@ public class ShoppingListDto {
     public String shoppingListName;
     @JsonIgnore
     public Recipe recipe;
-    @JsonIgnore
     public Long recipeId;
     public List<IngredientsForShoppingListDto> ingredients;
     @JsonIgnore

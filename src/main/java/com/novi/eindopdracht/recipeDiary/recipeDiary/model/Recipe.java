@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "recipes")
-
+@JsonIgnoreProperties("ingredients")
 public class Recipe {
 
     @Id
@@ -25,14 +26,14 @@ public class Recipe {
     private String recipeSource;
     private String categoryName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nutrition_Details_Id")
     private NutritionDetails nutritionDetails;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private List<Ingredient> ingredients;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shopping_List_Id")
     private ShoppingList shoppingList;
 
@@ -138,5 +139,9 @@ public class Recipe {
 
     public void setShoppingList(ShoppingList shoppingList) {
         this.shoppingList = shoppingList;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
