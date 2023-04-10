@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("nutrition_details")
+@RequestMapping("/nutrition_details")
 public class NutritionDetailsController {
 
     private final NutritionDetailsService nDetService;

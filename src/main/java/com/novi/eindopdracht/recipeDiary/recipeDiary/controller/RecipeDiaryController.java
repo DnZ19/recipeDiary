@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("recipeDiaries")
+@RequestMapping("/recipeDiaries")
 public class RecipeDiaryController {
 
     private final RecipeDiaryService rdService;

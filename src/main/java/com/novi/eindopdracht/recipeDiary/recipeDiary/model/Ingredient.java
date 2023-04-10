@@ -23,7 +23,7 @@ public class Ingredient {
     @JsonIgnore
     private Recipe recipe;
 
-    @ManyToMany(mappedBy = "ingredients")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ingredients")
     private List<ShoppingList> shoppingList;
 
     public Long getIngredientId() {

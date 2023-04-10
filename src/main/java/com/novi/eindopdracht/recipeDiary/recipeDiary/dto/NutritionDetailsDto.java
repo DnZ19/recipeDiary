@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
 
 public class NutritionDetailsDto {
@@ -9,8 +10,9 @@ public class NutritionDetailsDto {
     public int fat;
     public  int protein;
     public  int carbs;
+    @JsonIgnore
     public String errorMessage;
-
+    @JsonIgnore
     public Recipe recipe;
 
     public void setNutritionDetailsId(Long nutritionDetailsId) {

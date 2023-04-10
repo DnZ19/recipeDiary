@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("ingredients")
+@RequestMapping("/ingredients")
 public class IngredientController {
 
     private final IngredientService iService;
@@ -49,15 +49,6 @@ public class IngredientController {
         IngredientDto idto = iService.getIngredient(ingredientId);
 
         return ResponseEntity.ok(idto);
-
-//        if (idto.getErrorMessage().isEmpty()){
-//            return ResponseEntity.ok(idto);
-//        } else {
-//            return idto.getErrorMessage();
-//        }
-
-
-
     }
 
 }

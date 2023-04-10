@@ -2,6 +2,7 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class ShoppingList {
     @OneToOne(mappedBy = "shoppingList")
     private Recipe recipe;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "ingredient_shopping_list",
             joinColumns = @JoinColumn(name = "shopping_list_id"),
@@ -56,4 +57,16 @@ public class ShoppingList {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    public void addIngredient(Ingredient ingredient) {
+        if (ingredients == null) {
+            ingredients = new ArrayList<>();
+        }
+        if (!ingredients.contains(ingredient)) {
+            ingredients.add(ingredient);
+        }
+    }
+
+
+
 }

@@ -2,8 +2,8 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.util.List;
+
 
 
 @Entity
@@ -20,7 +20,6 @@ public class Recipe {
     private String prepTime;
     private int servings;
     private String notes;
-    private List<String> photos;
     private List<String> tags;
     private int rating;
     private String recipeSource;
@@ -37,8 +36,16 @@ public class Recipe {
     @JoinColumn(name = "shopping_List_Id")
     private ShoppingList shoppingList;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "photo_Id")
+    private Photo photo;
+
     public Long getRecipeId() {
         return recipeId;
+    }
+
+    public void setRecipeId(Long recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getName() {
@@ -79,14 +86,6 @@ public class Recipe {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public List<String> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<String> photos) {
-        this.photos = photos;
     }
 
     public List<String> getTags() {
@@ -143,5 +142,13 @@ public class Recipe {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 }

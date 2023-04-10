@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
 
 import java.util.List;
@@ -11,8 +12,10 @@ public class IngredientDto {
     public float quantity;
     public String unit;
     public String categoryName;
+    @JsonIgnore
     public String errorMessage;
     public Long recipeId;
+    @JsonIgnore
     public List<ShoppingList> shoppingList;
 
     public void setIngredientId(Long ingredientId) {
