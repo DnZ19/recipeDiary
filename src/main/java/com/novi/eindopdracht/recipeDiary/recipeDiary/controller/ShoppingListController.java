@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("shopping_list")
+@RequestMapping("/shopping_list")
 public class ShoppingListController {
 
     private final ShoppingListService slService;
@@ -42,6 +42,9 @@ public class ShoppingListController {
         return ResponseEntity.created(uri).body(slDto);
 
     }
+
+//    @PutMapping("{shoppingListId}/{ingredientId}")
+
 
     @GetMapping("/{shoppingListId}")
     public  ResponseEntity<ShoppingListDto> getShoppingList(@PathVariable Long shoppingListId){

@@ -1,3 +1,5 @@
+insert into roles(rolename) values ('USER'), ('ADMIN');
+
 -- CREATE SEQUENCE recipe_Diaries_seq START 1;
 -- ALTER SEQUENCE recipe_Diaries_seq RESTART WITH 1;
 
@@ -25,14 +27,14 @@ insert into shopping_List(shopping_list_id, shopping_List_Name) values (30003, '
 -- CREATE SEQUENCE recipes_seq START 1;
 -- ALTER SEQUENCE recipes_seq RESTART WITH 1;
 
-insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, photos, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
-    values (40001, 'Tomato soup', 'Cut tomatoes and boil the shit out of them', '1 hour', 5, 'Put red unions in there for extra flavour', '{url1, url2}', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20001, 30001);
+insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
+    values (40001, 'Tomato soup', 'Cut tomatoes and boil the shit out of them', '1 hour', 5, 'Put red unions in there for extra flavour', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20001, 30001);
 
-insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, photos, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
-values (40002, 'Frikadellen Fritatta', 'Fritatta de dellen!!', '1 hour', 5, 'Put red unions in there for extra flavour', '{url1, url2}', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20002, 30002);
+insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
+values (40002, 'Frikadellen Fritatta', 'Fritatta de dellen!!', '1 hour', 5, 'Put red unions in there for extra flavour', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20002, 30002);
 
-insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, photos, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
-values (40003, 'Groente Ijs', 'spinazie ijs', '1 hour', 5, 'Put red unions in there for extra flavour', '{url1, url2}', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20003, 30003);
+insert into recipes(recipe_Id, name, instructions, prep_time, servings, notes, tags, rating, recipe_source, category_name, nutrition_details_Id, shopping_list_id)
+values (40003, 'Groente Ijs', 'spinazie ijs', '1 hour', 5, 'Put red unions in there for extra flavour', '{healthy, sjizzle}', 7, 'www.soup.com', 'soup', 20003, 30003);
 
 
 insert into ingredient(ingredient_id, ingredient_name, quantity, unit, category_name, recipe_id) values (50001, 'Tomatoes', 1, 'Kilo', 'Vegetable', 40001);

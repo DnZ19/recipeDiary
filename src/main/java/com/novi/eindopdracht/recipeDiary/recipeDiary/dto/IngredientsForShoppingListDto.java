@@ -7,12 +7,14 @@ import java.util.List;
 
 public class IngredientsForShoppingListDto {
 
+    @JsonIgnore
     public Long ingredientId;
     public String ingredientName;
     public float quantity;
     public String unit;
-
+    @JsonIgnore
     public Long recipeId;
+    @JsonIgnore
     public List<ShoppingList> shoppingList;
 
     public Long getIngredientId() {
