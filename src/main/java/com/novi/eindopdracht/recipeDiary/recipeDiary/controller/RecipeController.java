@@ -1,12 +1,10 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.*;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeIngredientsService;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeNutritionService;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeService;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeShoppingListService;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.service.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,13 +22,15 @@ public class RecipeController {
     private final RecipeNutritionService nutritionService;
     private final RecipeIngredientsService ingredientsService;
     private final RecipeShoppingListService shoppingListService;
+    private final RecipePhotoService photoService;
 
 
-    public RecipeController(RecipeService recipeService, RecipeNutritionService nutritionService, RecipeIngredientsService ingredientsService, RecipeShoppingListService shoppingListService) {
+    public RecipeController(RecipeService recipeService, RecipeNutritionService nutritionService, RecipeIngredientsService ingredientsService, RecipeShoppingListService shoppingListService, RecipePhotoService photoService) {
         this.recipeService = recipeService;
         this.nutritionService = nutritionService;
         this.ingredientsService = ingredientsService;
         this.shoppingListService = shoppingListService;
+        this.photoService = photoService;
     }
 
     @PostMapping
@@ -81,6 +81,14 @@ public class RecipeController {
 
     }
 
+    @PutMapping("{recipeId}/photo/{photoId}")
+    public ResponseEntity<RecipeDto> linkPhotoToRecipe(@PathVariable("recipeId") Long recipeId, @PathVariable("photoId") Long photoId){
+
+        RecipeDto rdto = photoService.linkPhotoToRecipe(recipeId, photoId);
+
+        return ResponseEntity.ok(rdto);
+
+    }
 
     @GetMapping("/{recipeId}")
     public ResponseEntity<RecipeDto> getRecipe(@PathVariable Long recipeId){
@@ -110,6 +118,13 @@ public class RecipeController {
 
         return ResponseEntity.ok(shoppingListDto);
 
+    }
+
+    @GetMapping("/{recipeId}/photo")
+    public ResponseEntity<PhotoDto> getPhoto(@PathVariable Long recipeId) {
+        PhotoDto photoDto = photoService.getPhoto(recipeId);
+
+        return ResponseEntity.ok(photoDto);
     }
 
 }
