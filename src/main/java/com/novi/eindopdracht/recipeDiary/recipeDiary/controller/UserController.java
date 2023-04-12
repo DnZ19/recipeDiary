@@ -1,11 +1,14 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.UserCredentialsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.UserDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Role;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.User;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RoleRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.UserRepository;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +23,13 @@ public class UserController {
     private final UserRepository userRepos;
     private final RoleRepository roleRepos;
     private final PasswordEncoder encoder;
+    private final UserService uService;
 
-    public UserController(UserRepository userRepos, RoleRepository roleRepos, PasswordEncoder encoder) {
+    public UserController(UserRepository userRepos, RoleRepository roleRepos, PasswordEncoder encoder, UserService uService) {
         this.userRepos = userRepos;
         this.roleRepos = roleRepos;
         this.encoder = encoder;
+        this.uService = uService;
     }
     @PostMapping("/users")
     public String createUser(@RequestBody UserDto userDto) {
@@ -44,4 +49,11 @@ public class UserController {
 
         return "Done";
     }
+
+    @GetMapping("/roles")
+    public List<UserCredentialsDto> getAllUserRoles() {
+        return uService.getAllUserCredentials();
+    }
+
+
 }
