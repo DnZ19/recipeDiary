@@ -46,10 +46,9 @@ public class NutritionDetailsService {
             return nddto;
 
         } catch (ResourceNotFoundException exception) {
-            // log the error message
+
             System.err.println(exception.getMessage());
 
-            // return an error response to the browser
             NutritionDetailsDto errorResponse = new NutritionDetailsDto();
             errorResponse.errorMessage = exception.getMessage();
             return errorResponse;

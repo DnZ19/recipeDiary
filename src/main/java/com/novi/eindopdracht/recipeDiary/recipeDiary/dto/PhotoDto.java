@@ -8,14 +8,10 @@ public class PhotoDto {
 
     public Long photoId;
     public String dishName;
-    @JsonIgnore
     public Recipe recipe;
-    public byte[] imageData;
+    public String imageData;
     @JsonIgnore
     public String errorMessage;
-
-    public void SetPhotoId(Long photoId) {
-    }
 
     public Long getPhotoId() {
         return photoId;
@@ -41,11 +37,11 @@ public class PhotoDto {
         this.recipe = recipe;
     }
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 
