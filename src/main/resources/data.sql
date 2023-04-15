@@ -1,5 +1,8 @@
 insert into roles(rolename) values ('USER'), ('ADMIN');
 
+insert into users(user_id, username, password) values (100, 'dennis', 'javaan');
+-- insert into users_roles(user_id, rolesname) values (100, 'USER');
+
 -- CREATE SEQUENCE recipe_Diaries_seq START 1;
 -- ALTER SEQUENCE recipe_Diaries_seq RESTART WITH 1;
 

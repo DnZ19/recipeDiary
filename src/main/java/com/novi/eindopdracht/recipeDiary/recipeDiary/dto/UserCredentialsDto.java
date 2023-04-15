@@ -4,11 +4,12 @@ import java.util.List;
 
 public class UserCredentialsDto {
 
+    public Long userId;
     public String username;
-
     public List<String> roles;
 
-    public UserCredentialsDto(String username, List<String> roles) {
+    public UserCredentialsDto(Long userId, String username, List<String> roles) {
+        this.userId = userId;
         this.username = username;
         this.roles = roles;
     }
@@ -27,5 +28,13 @@ public class UserCredentialsDto {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

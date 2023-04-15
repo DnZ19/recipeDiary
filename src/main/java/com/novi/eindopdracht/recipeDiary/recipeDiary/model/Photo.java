@@ -1,8 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "photo")

@@ -28,11 +28,10 @@ public class PhotoController {
         this.pService = pService;
     }
 
-    @PostMapping(value = "/recipe/{recipeId}/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<PhotoDto> addPhoto(@PathVariable Long recipeId,
-                                             @RequestParam("file") MultipartFile file,
+    @PostMapping
+    public ResponseEntity<PhotoDto> addPhoto(@RequestParam("file") MultipartFile file,
                                              @RequestParam("dishName") String dishName) throws IOException {
-        Photo photo = pService.savePhoto(recipeId, file, dishName);
+        Photo photo = pService.savePhoto(file, dishName);
         PhotoDto dto = pService.convertToDto(photo);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
