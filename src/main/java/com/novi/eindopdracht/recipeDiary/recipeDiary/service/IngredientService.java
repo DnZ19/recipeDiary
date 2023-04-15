@@ -30,9 +30,6 @@ public class IngredientService {
         i.setCategoryName(idto.categoryName);
         i.setErrorMessage(idto.errorMessage);
 
-//        Recipe recipe = rRepos.findById(idto.recipeId).get();
-//        i.setRecipe(recipe);
-
         if (idto.recipeId != null) {
             Recipe recipe = rRepos.findById(idto.recipeId).get();
             i.setRecipe(recipe);

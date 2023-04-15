@@ -1,5 +1,7 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +14,10 @@ public class RecipeDiary {
     private Long recipeDiaryId;
     private String name;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 
     public RecipeDiary() {
     }
@@ -26,5 +32,17 @@ public class RecipeDiary {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setRecipeDiaryId(Long recipeDiaryId) {
+        this.recipeDiaryId = recipeDiaryId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

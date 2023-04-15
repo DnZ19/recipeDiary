@@ -1,6 +1,7 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.security;
 
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -48,13 +50,23 @@ public class SecurityConfig  {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        AccessDeniedHandler accessDeniedHandler = (request, response, e) -> {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\": \"Access doe het lekker zelf\"}");
+        };
+
         http
                 .httpBasic().disable()
+                .cors()
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                .requestMatchers("/roles").hasAuthority("ADMIN")
+                .requestMatchers("/credentials").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users/*/recipeDiary").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.GET,"/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.PUT,"/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.DELETE,"/**").hasAnyAuthority("USER", "ADMIN")
@@ -63,7 +75,9 @@ public class SecurityConfig  {
                 .and()
                 .addFilterBefore(new JwtRequestFilter(jwtService, userDetailsService()), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
         return http.build();
     }

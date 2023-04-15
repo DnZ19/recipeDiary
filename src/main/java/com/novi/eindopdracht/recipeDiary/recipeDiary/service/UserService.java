@@ -25,7 +25,7 @@ public class UserService {
         uRepos.findAll().forEach(users::add);
 
         return users.stream()
-                .map(user -> new UserCredentialsDto(user.getUsername(), user.getRoles().stream().map(Role::getRolename).collect(Collectors.toList())))
+                .map(user -> new UserCredentialsDto(user.getUserId(), user.getUsername(), user.getRoles().stream().map(Role::getRolename).collect(Collectors.toList())))
                 .collect(Collectors.toList());
 
     }
