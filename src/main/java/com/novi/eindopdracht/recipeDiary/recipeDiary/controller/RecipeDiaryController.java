@@ -1,6 +1,7 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryOverviewDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryRecipesService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryService;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recipeDiary")
-public class RecipeDiaryController {
+public class RecipeDiaryController extends BaseController{
 
     private final RecipeDiaryService rdService;
     private final RecipeDiaryRecipesService recipeDiaryRecipesService;
@@ -28,15 +29,11 @@ public class RecipeDiaryController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createRecipeDiary(@Valid @RequestBody RecipeDiaryDto rddto, BindingResult br){
+    public ResponseEntity<Object> createRecipeDiary(@Valid @RequestBody RecipeDiaryDto rddto, BindingResult bindingResult){
 
-        if (br.hasFieldErrors()){
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()){
-                sb.append(fe.getField() + ": ");
-                sb.append(fe.getDefaultMessage() + "\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        ResponseEntity<Object> errorResponse = buildErrorResponse(bindingResult);
+        if (errorResponse != null) {
+            return errorResponse;
         }
 
         Long recipeDiaryId = rdService.createRecipeDiary(rddto);

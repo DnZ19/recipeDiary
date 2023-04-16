@@ -42,9 +42,8 @@ public class IngredientService {
 
     public IngredientDto getIngredient(Long ingredientId){
 
-        try{
-
-            Ingredient i = iRepos.findById(ingredientId).orElseThrow(()-> new ResourceNotFoundException("Ingredient not found"));
+            Ingredient i = iRepos.findById(ingredientId)
+                    .orElseThrow(()-> new ResourceNotFoundException("Ingredient not found with id: " + ingredientId));
 
             IngredientDto idto = new IngredientDto();
             idto.ingredientId = i.getIngredientId();
@@ -58,17 +57,7 @@ public class IngredientService {
 
             return idto;
 
-        } catch (ResourceNotFoundException exception) {
-
-            System.err.println(exception.getMessage());
-
-            IngredientDto errorResponse = new IngredientDto();
-            errorResponse.errorMessage = exception.getMessage();
-
-            return errorResponse;
         }
 
     }
 
-
-}

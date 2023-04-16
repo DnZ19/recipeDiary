@@ -33,8 +33,8 @@ public class NutritionDetailsService {
 
     public NutritionDetailsDto getNutritionDetails(Long nutritionDetailsId){
 
-        try{
-            NutritionDetails nd = nutritionRepos.findById(nutritionDetailsId).orElseThrow(() -> new ResourceNotFoundException("Nutrition item not found"));
+            NutritionDetails nd = nutritionRepos.findById(nutritionDetailsId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Nutrition item not found with id: " + nutritionDetailsId));
 
             NutritionDetailsDto nddto = new NutritionDetailsDto();
             nddto.nutritionDetailsId = nd.getNutritionDetailsId();
@@ -45,17 +45,7 @@ public class NutritionDetailsService {
 
             return nddto;
 
-        } catch (ResourceNotFoundException exception) {
-
-            System.err.println(exception.getMessage());
-
-            NutritionDetailsDto errorResponse = new NutritionDetailsDto();
-            errorResponse.errorMessage = exception.getMessage();
-            return errorResponse;
         }
 
     }
 
-
-
-}

@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/shopping_list")
-public class ShoppingListController {
+public class ShoppingListController extends BaseController {
 
     private final ShoppingListService slService;
 
@@ -23,15 +23,11 @@ public class ShoppingListController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createShoppingList(@Valid @RequestBody ShoppingListDto slDto, BindingResult br){
+    public ResponseEntity<Object> createShoppingList(@Valid @RequestBody ShoppingListDto slDto, BindingResult bindingResult){
 
-        if (br.hasFieldErrors()){
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()){
-                sb.append(fe.getField() + ": ");
-                sb.append(fe.getDefaultMessage() + "\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        ResponseEntity<Object> errorResponse = buildErrorResponse(bindingResult);
+        if (errorResponse != null) {
+            return errorResponse;
         }
 
         Long shoppingListId = slService.createShoppingList(slDto);

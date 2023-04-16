@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/ingredients")
-public class IngredientController {
+public class IngredientController extends BaseController {
 
     private final IngredientService iService;
 
@@ -24,15 +24,11 @@ public class IngredientController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createIngredient(@Valid @RequestBody IngredientDto idto, BindingResult br){
+    public ResponseEntity<Object> createIngredient(@Valid @RequestBody IngredientDto idto, BindingResult bindingResult){
 
-        if (br.hasFieldErrors()){
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()){
-                sb.append(fe.getField() + ": ");
-                sb.append(fe.getDefaultMessage() + "\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        ResponseEntity<Object> errorResponse = buildErrorResponse(bindingResult);
+        if (errorResponse != null) {
+            return errorResponse;
         }
 
         Long ingredientId = iService.createIngredient(idto);
