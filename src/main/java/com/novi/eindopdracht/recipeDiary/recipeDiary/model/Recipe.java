@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 
-
 @Entity
 @Table(name = "recipes")
 @JsonIgnoreProperties("ingredients")
@@ -17,12 +16,13 @@ public class Recipe {
 
     private Long recipeId;
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String instructions;
     private String prepTime;
     private int servings;
+    @Column(columnDefinition = "TEXT")
     private String notes;
     private String tag;
-
     private int rating;
     private String recipeSource;
     private String categoryName;

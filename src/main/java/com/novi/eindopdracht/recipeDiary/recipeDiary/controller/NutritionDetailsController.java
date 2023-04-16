@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/nutrition_details")
-public class NutritionDetailsController {
+public class NutritionDetailsController extends BaseController {
 
     private final NutritionDetailsService nDetService;
 
@@ -25,15 +25,11 @@ public class NutritionDetailsController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createNutritionDetails(@Valid @RequestBody NutritionDetailsDto nddto, BindingResult br){
+    public ResponseEntity<Object> createNutritionDetails(@Valid @RequestBody NutritionDetailsDto nddto, BindingResult bindingResult){
 
-        if (br.hasFieldErrors()){
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()){
-                sb.append(fe.getField() + ": ");
-                sb.append(fe.getDefaultMessage() + "\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        ResponseEntity<Object> errorResponse = buildErrorResponse(bindingResult);
+        if (errorResponse != null) {
+            return errorResponse;
         }
 
         Long nutritionDetailsId = nDetService.createNutritionDetails(nddto);

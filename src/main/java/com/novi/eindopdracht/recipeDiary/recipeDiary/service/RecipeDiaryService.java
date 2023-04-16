@@ -29,26 +29,18 @@ public class RecipeDiaryService {
 
     }
 
-    public RecipeDiaryDto getRecipeDiary(Long recipeDiaryId){
-        try{
-            RecipeDiary rd = diaryRepos.findById(recipeDiaryId).orElseThrow(() -> new ResourceNotFoundException("Recipe Diary not found")) ;
+    public RecipeDiaryDto getRecipeDiary(Long recipeDiaryId) {
+        RecipeDiary rd = diaryRepos.findById(recipeDiaryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe Diary not found with ID: " + recipeDiaryId));
 
-            RecipeDiaryDto rddto = new RecipeDiaryDto();
-            rddto.recipeDiaryId = rd.getRecipeDiaryId();
-            rddto.name = rd.getName();
-            rddto.recipes = rd.getRecipes();
+        RecipeDiaryDto rddto = new RecipeDiaryDto();
+        rddto.recipeDiaryId = rd.getRecipeDiaryId();
+        rddto.name = rd.getName();
+        rddto.recipes = rd.getRecipes();
 
-            return rddto;
-
-        } catch (ResourceNotFoundException exception) {
-
-            System.err.println(exception.getMessage());
-
-            RecipeDiaryDto errorResponse = new RecipeDiaryDto();
-            errorResponse.errorMessage = exception.getMessage();
-            return errorResponse;
-        }
+        return rddto;
     }
+
 
     public List<RecipeDiary> getAllDiaries()
     {

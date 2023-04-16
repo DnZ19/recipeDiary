@@ -21,7 +21,6 @@ public class RecipeDiaryRecipesService {
     private final RecipeRepository rRepos;
     private final RecipeDiaryRepository rdRepos;
 
-
     public RecipeDiaryRecipesService(RecipeRepository rRepos, RecipeDiaryRepository rdRepos) {
         this.rRepos = rRepos;
         this.rdRepos = rdRepos;

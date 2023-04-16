@@ -31,6 +31,7 @@ public class PhotoController {
     @PostMapping
     public ResponseEntity<PhotoDto> addPhoto(@RequestParam("file") MultipartFile file,
                                              @RequestParam("dishName") String dishName) throws IOException {
+
         Photo photo = pService.savePhoto(file, dishName);
         PhotoDto dto = pService.convertToDto(photo);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);

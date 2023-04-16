@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recipes")
-public class RecipeController {
+public class RecipeController extends BaseController {
 
     private final RecipeService recipeService;
     private final RecipeNutritionService nutritionService;
@@ -34,15 +34,11 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createRecipe(@Valid @RequestBody RecipeDto rdto, BindingResult br){
+    public ResponseEntity<Object> createRecipe(@Valid @RequestBody RecipeDto rdto, BindingResult bindingResult){
 
-        if (br.hasFieldErrors()){
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()){
-                sb.append(fe.getField() + ": ");
-                sb.append(fe.getDefaultMessage() + "\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        ResponseEntity<Object> errorResponse = buildErrorResponse(bindingResult);
+        if (errorResponse != null) {
+            return errorResponse;
         }
 
         Long recipeId = recipeService.createRecipe(rdto);

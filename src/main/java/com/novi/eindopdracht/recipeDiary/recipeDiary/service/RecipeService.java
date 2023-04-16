@@ -36,9 +36,6 @@ public class RecipeService {
         r.setRating(rdto.rating);
         r.setRecipeSource(rdto.recipeSource);
         r.setCategoryName(rdto.categoryName);
-//        r.setIngredients(rdto.ingredients);
-//        r.setNutritionDetails(rdto.nutritionDetails);
-//        r.setRecipeDiary(rdto.recipeDiary);
 
         rRepos.save(r);
 
@@ -46,8 +43,8 @@ public class RecipeService {
     }
 
     public RecipeDto getRecipe(Long recipeId) {
-        try {
-            Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found"));
+
+            Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
 
             RecipeDto rdto = new RecipeDto();
             rdto.recipeId = r.getRecipeId();
@@ -60,9 +57,6 @@ public class RecipeService {
             rdto.rating = r.getRating();
             rdto.recipeSource = r.getRecipeSource();
             rdto.categoryName = r.getCategoryName();
-//            rdto.ingredients = r.getIngredients();
-//            rdto.nutritionDetails = r.getNutritionDetails();
-//            rdto.recipeDiary = r.getRecipeDiary();
 
             if (r.getIngredients() != null) {
                 rdto.ingredients = r.getIngredients();
@@ -76,14 +70,6 @@ public class RecipeService {
 
             return rdto;
 
-        } catch (ResourceNotFoundException exception) {
-            System.err.println(exception.getMessage());
-
-            RecipeDto errorResponse = new RecipeDto();
-            errorResponse.errorMessage = exception.getMessage();
-            return errorResponse;
         }
 
     }
-
-}
