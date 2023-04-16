@@ -1,7 +1,9 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 
 import java.util.List;
 
@@ -13,15 +15,22 @@ public class RecipeDto {
     public String prepTime;
     public int servings;
     public String notes;
-    public List<String> tags;
+    public String tag;
     public int rating;
     public String recipeSource;
     public String categoryName;
+//    public Long PhotoId;
 
+    @JsonIgnore
     public List<Ingredient> ingredients;
+    @JsonIgnore
     public NutritionDetails nutritionDetails;
+    @JsonIgnore
     public Long shoppingListId;
+    @JsonIgnore
+    public RecipeDiary recipeDiary;
 
+    @JsonIgnore
     public String errorMessage;
 
     public Long getRecipeId() {
@@ -79,4 +88,20 @@ public class RecipeDto {
     public void setNutritionDetails(NutritionDetails nutritionDetails) {
         this.nutritionDetails = nutritionDetails;
     }
+
+    public RecipeDiary getRecipeDiary() {
+        return recipeDiary;
+    }
+
+    public void setRecipeDiary(RecipeDiary recipeDiary) {
+        this.recipeDiary = recipeDiary;
+    }
+
+//    public Long getPhotoId() {
+//        return PhotoId;
+//    }
+//
+//    public void setPhotoId(Long photoId) {
+//        PhotoId = photoId;
+//    }
 }

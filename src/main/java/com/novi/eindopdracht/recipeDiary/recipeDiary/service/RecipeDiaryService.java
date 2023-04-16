@@ -21,6 +21,7 @@ public class RecipeDiaryService {
 
         RecipeDiary rd = new RecipeDiary();
         rd.setName(rddto.name);
+        rd.setRecipes(rddto.getRecipes());
 
         diaryRepos.save(rd);
 
@@ -35,6 +36,7 @@ public class RecipeDiaryService {
             RecipeDiaryDto rddto = new RecipeDiaryDto();
             rddto.recipeDiaryId = rd.getRecipeDiaryId();
             rddto.name = rd.getName();
+            rddto.recipes = rd.getRecipes();
 
             return rddto;
 

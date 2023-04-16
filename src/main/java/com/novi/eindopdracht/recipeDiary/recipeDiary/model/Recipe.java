@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
@@ -20,16 +21,23 @@ public class Recipe {
     private String prepTime;
     private int servings;
     private String notes;
-    private List<String> tags;
+    private String tag;
+
     private int rating;
     private String recipeSource;
     private String categoryName;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_diary_id")
+    @JsonBackReference
+    private RecipeDiary recipeDiary;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nutrition_Details_Id")
+    @JoinColumn(name = "nutrition_details_Id")
     private NutritionDetails nutritionDetails;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -88,12 +96,12 @@ public class Recipe {
         this.notes = notes;
     }
 
-    public List<String> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public int getRating() {
@@ -150,5 +158,13 @@ public class Recipe {
 
     public void setPhoto(Photo photo) {
         this.photo = photo;
+    }
+
+    public RecipeDiary getRecipeDiary() {
+        return recipeDiary;
+    }
+
+    public void setRecipeDiary(RecipeDiary recipeDiary) {
+        this.recipeDiary = recipeDiary;
     }
 }

@@ -1,5 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +18,12 @@ public class Photo {
 
     @Lob
     @Column(nullable = true, length = 64)
+    @JsonIgnore
     private byte[] imageData;
+
+    // Add a transient field for the Base64 encoded image
+//    @Transient
+//    private String base64ImageData;
 
     public Long getPhotoId() {
         return photoId;

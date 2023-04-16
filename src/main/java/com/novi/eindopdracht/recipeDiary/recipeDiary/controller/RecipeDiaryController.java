@@ -1,10 +1,9 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
-
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.PhotoDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryDto;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryOverviewDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
+import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryRecipesService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryService;
-//import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +16,15 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/recipeDiaries")
+@RequestMapping("/recipeDiary")
 public class RecipeDiaryController {
 
     private final RecipeDiaryService rdService;
+    private final RecipeDiaryRecipesService recipeDiaryRecipesService;
 
-    public RecipeDiaryController(RecipeDiaryService rdService){
+    public RecipeDiaryController(RecipeDiaryService rdService, RecipeDiaryRecipesService recipeDiaryRecipesService){
         this.rdService = rdService;
+        this.recipeDiaryRecipesService = recipeDiaryRecipesService;
     }
 
     @PostMapping
@@ -47,6 +48,16 @@ public class RecipeDiaryController {
 
     }
 
+    @PutMapping("/{recipeDiaryId}/recipes/{recipeId}")
+    public ResponseEntity<RecipeDiaryDto> linkAllRecipesToDiary(@PathVariable("recipeDiaryId") Long recipeDiaryId, @PathVariable("recipeId") Long recipeId) {
+
+        RecipeDiaryDto rddto = recipeDiaryRecipesService.linkAllRecipesToDiary(recipeDiaryId, recipeId);
+
+        return ResponseEntity.ok(rddto);
+
+    }
+
+
     @GetMapping("/")
     public String helloWorld(){
         return "Hello World new Diary app";
@@ -62,6 +73,11 @@ public class RecipeDiaryController {
     @GetMapping("/allDiaries")
     public List<RecipeDiary> getAllDiaries() {
         return rdService.getAllDiaries();
+    }
+
+    @GetMapping("/{recipeDiaryId}/recipes")
+    public List<RecipeDiaryOverviewDto> getAllRecipesForDiary(@PathVariable Long recipeDiaryId) {
+        return recipeDiaryRecipesService.getAllRecipesForDiary(recipeDiaryId);
     }
 
 }
