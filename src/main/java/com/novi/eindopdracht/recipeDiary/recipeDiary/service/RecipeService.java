@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,10 +32,13 @@ public class RecipeService {
         r.setPrepTime(rdto.prepTime);
         r.setServings(rdto.servings);
         r.setNotes(rdto.notes);
-        r.setTags(rdto.tags);
+        r.setTag(rdto.tag);
         r.setRating(rdto.rating);
         r.setRecipeSource(rdto.recipeSource);
         r.setCategoryName(rdto.categoryName);
+//        r.setIngredients(rdto.ingredients);
+//        r.setNutritionDetails(rdto.nutritionDetails);
+//        r.setRecipeDiary(rdto.recipeDiary);
 
         rRepos.save(r);
 
@@ -52,10 +56,23 @@ public class RecipeService {
             rdto.prepTime = r.getPrepTime();
             rdto.servings = r.getServings();
             rdto.notes = r.getNotes();
-            rdto.tags = r.getTags();
+            rdto.tag = r.getTag();
             rdto.rating = r.getRating();
             rdto.recipeSource = r.getRecipeSource();
             rdto.categoryName = r.getCategoryName();
+//            rdto.ingredients = r.getIngredients();
+//            rdto.nutritionDetails = r.getNutritionDetails();
+//            rdto.recipeDiary = r.getRecipeDiary();
+
+            if (r.getIngredients() != null) {
+                rdto.ingredients = r.getIngredients();
+            }
+            if (r.getNutritionDetails() != null) {
+                rdto.nutritionDetails = r.getNutritionDetails();
+            }
+            if (r.getRecipeDiary() != null) {
+                rdto.recipeDiary = r.getRecipeDiary();
+            }
 
             return rdto;
 

@@ -46,31 +46,31 @@ public class IngredientDto {
         this.recipeId = recipeId;
     }
 
-    public Long getIngredientId() {
-        return ingredientId;
-    }
-
-    public String getIngredientName() {
-        return ingredientName;
-    }
-
-    public float getQuantity() {
-        return quantity;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public List<ShoppingList> getShoppingList() {
-        return shoppingList;
-    }
+//    public Long getIngredientId() {
+//        return ingredientId;
+//    }
+//
+//    public String getIngredientName() {
+//        return ingredientName;
+//    }
+//
+//    public float getQuantity() {
+//        return quantity;
+//    }
+//
+//    public String getUnit() {
+//        return unit;
+//    }
+//
+//    public String getCategoryName() {
+//        return categoryName;
+//    }
+//
+//    public String getErrorMessage() {
+//        return errorMessage;
+//    }
+//
+//    public List<ShoppingList> getShoppingList() {
+//        return shoppingList;
+//    }
 }

@@ -21,8 +21,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -82,6 +84,10 @@ public class UserController {
         UserDto responseUserDto = new UserDto();
         responseUserDto.setUserId(savedUser.getUserId());
         responseUserDto.setUsername(savedUser.getUsername());
+        responseUserDto.setPassword(savedUser.getPassword());
+        //responseUserDto.setRoles(savedUser.getRoles().stream().map(Role::getRolename).collect(Collectors.toList()));
+        responseUserDto.setRecipeDiary(savedUser.getRecipeDiary());
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUserDto);
     }

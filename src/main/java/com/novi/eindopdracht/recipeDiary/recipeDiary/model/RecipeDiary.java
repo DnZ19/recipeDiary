@@ -2,7 +2,10 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "recipe_diaries")
@@ -19,8 +22,11 @@ public class RecipeDiary {
     @JsonBackReference
     private User user;
 
-    public RecipeDiary() {
-    }
+    @OneToMany(mappedBy = "recipeDiary", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Recipe> recipes;
+
+    public RecipeDiary() {}
 
     public Long getRecipeDiaryId() {
         return recipeDiaryId;
@@ -44,5 +50,13 @@ public class RecipeDiary {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }

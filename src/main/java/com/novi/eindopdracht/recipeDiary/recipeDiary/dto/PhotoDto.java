@@ -8,6 +8,7 @@ public class PhotoDto {
 
     public Long photoId;
     public String dishName;
+    @JsonIgnore
     public Recipe recipe;
     public String imageData;
     @JsonIgnore
