@@ -32,9 +32,9 @@ public class RecipeService {
         r.setRecipeSource(rdto.recipeSource);
         r.setCategoryName(rdto.categoryName);
 
-        rRepos.save(r);
+        Recipe savedRecipe = rRepos.save(r);
 
-        return r.getRecipeId();
+        return savedRecipe.getRecipeId();
     }
 
     public RecipeDto getRecipe(Long recipeId) {
@@ -47,7 +47,13 @@ public class RecipeService {
         Recipe recipe = rRepos.findById(recipeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
         String currentNotes = recipe.getNotes();
-        recipe.setNotes(currentNotes + "\n" + newNotes);
+
+        if (!currentNotes.isEmpty()) {
+            recipe.setNotes(currentNotes + "\n" + newNotes);
+        } else {
+            recipe.setNotes(newNotes);
+        }
+
         rRepos.save(recipe);
     }
 
