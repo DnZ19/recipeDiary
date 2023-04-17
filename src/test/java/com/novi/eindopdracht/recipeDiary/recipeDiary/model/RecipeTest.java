@@ -27,12 +27,13 @@ class RecipeTest {
         // Arrange
         Recipe recipe = new Recipe();
         String name = "Delicious Recipe";
-
-        // Act
         recipe.setName(name);
 
+        // Act
+        String result = recipe.getName();
+
         // Assert
-        assertEquals(name, recipe.getName());
+        assertEquals("Delicious Recipe", result);
     }
 
     @Test
