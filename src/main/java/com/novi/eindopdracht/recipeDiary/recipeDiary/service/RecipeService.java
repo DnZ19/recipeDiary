@@ -67,9 +67,14 @@ public class RecipeService {
             if (r.getRecipeDiary() != null) {
                 rdto.recipeDiary = r.getRecipeDiary();
             }
-
             return rdto;
-
         }
+
+    public void updateNotes(Long recipeId, String newNotes) {
+        Recipe recipe = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
+        String currentNotes = recipe.getNotes();
+        recipe.setNotes(currentNotes + "\n" + newNotes);
+        rRepos.save(recipe);
+    }
 
     }

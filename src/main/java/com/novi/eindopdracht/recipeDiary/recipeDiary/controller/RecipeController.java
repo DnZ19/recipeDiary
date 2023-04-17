@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/recipes")
@@ -121,6 +122,16 @@ public class RecipeController extends BaseController {
         PhotoDto photoDto = photoService.getPhoto(recipeId);
 
         return ResponseEntity.ok(photoDto);
+    }
+
+    @PatchMapping("/{recipeId}/notes")
+    public ResponseEntity<Void> updateNotes(@PathVariable Long recipeId, @RequestBody Map<String, String> requestBody) {
+        String newNotes = requestBody.get("notes");
+        if (newNotes == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        recipeService.updateNotes(recipeId, newNotes);
+        return ResponseEntity.noContent().build();
     }
 
 }
