@@ -3,16 +3,11 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.*;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.*;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.NutritionDetailsRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.ShoppingListRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,38 +38,52 @@ public class RecipeService {
     }
 
     public RecipeDto getRecipe(Long recipeId) {
-
-            Recipe r = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
-
-            RecipeDto rdto = new RecipeDto();
-            rdto.recipeId = r.getRecipeId();
-            rdto.name = r.getName();
-            rdto.instructions = r.getInstructions();
-            rdto.prepTime = r.getPrepTime();
-            rdto.servings = r.getServings();
-            rdto.notes = r.getNotes();
-            rdto.tag = r.getTag();
-            rdto.rating = r.getRating();
-            rdto.recipeSource = r.getRecipeSource();
-            rdto.categoryName = r.getCategoryName();
-
-            if (r.getIngredients() != null) {
-                rdto.ingredients = r.getIngredients();
-            }
-            if (r.getNutritionDetails() != null) {
-                rdto.nutritionDetails = r.getNutritionDetails();
-            }
-            if (r.getRecipeDiary() != null) {
-                rdto.recipeDiary = r.getRecipeDiary();
-            }
-            return rdto;
-        }
+        Recipe r = rRepos.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
+        return convertRecipeToRecipeDto(r);
+    }
 
     public void updateNotes(Long recipeId, String newNotes) {
-        Recipe recipe = rRepos.findById(recipeId).orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
+        Recipe recipe = rRepos.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + recipeId));
         String currentNotes = recipe.getNotes();
         recipe.setNotes(currentNotes + "\n" + newNotes);
         rRepos.save(recipe);
+    }
+
+    private RecipeDto convertRecipeToRecipeDto(Recipe recipe) {
+        RecipeDto rdto = new RecipeDto();
+        rdto.recipeId = recipe.getRecipeId();
+        rdto.name = recipe.getName();
+        rdto.instructions = recipe.getInstructions();
+        rdto.prepTime = recipe.getPrepTime();
+        rdto.servings = recipe.getServings();
+        rdto.notes = recipe.getNotes();
+        rdto.tag = recipe.getTag();
+        rdto.rating = recipe.getRating();
+        rdto.recipeSource = recipe.getRecipeSource();
+        rdto.categoryName = recipe.getCategoryName();
+        rdto.ingredients = recipe.getIngredients();
+        rdto.nutritionDetails = recipe.getNutritionDetails();
+        rdto.recipeDiary = recipe.getRecipeDiary();
+
+        return rdto;
+    }
+
+    public List<RecipeDto> searchRecipeByIngredient(String ingredientName) {
+        List<Recipe> allRecipes = rRepos.findAll();
+
+        List<Recipe> filteredRecipes = allRecipes.stream()
+                .filter(recipe -> recipe.getIngredients().stream()
+                        .anyMatch(ingredient -> ingredient.getIngredientName().equalsIgnoreCase(ingredientName)))
+                .toList();
+
+        List<RecipeDto> recipeDtos = new ArrayList<>();
+        for (Recipe recipe : filteredRecipes) {
+            recipeDtos.add(convertRecipeToRecipeDto(recipe));
+        }
+
+        return recipeDtos;
     }
 
     }

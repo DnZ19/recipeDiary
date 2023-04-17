@@ -1,7 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.UserCredentialsDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.UserDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Role;
@@ -10,21 +9,14 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RoleRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.UserRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryUserService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -43,26 +35,6 @@ public class UserController {
         this.uService = uService;
         this.rduService = rduService;
     }
-
-//    @PostMapping
-//    public String createUser(@RequestBody UserDto userDto) {
-//        User newUser = new User();
-//        newUser.setUserId(userDto.userId);
-//        newUser.setUsername(userDto.username);
-//        newUser.setPassword(encoder.encode(userDto.password));
-//
-//        List<Role> userRoles = new ArrayList<>();
-//        for (String rolename : userDto.roles) {
-//            Optional<Role> or = roleRepos.findById(rolename);
-//
-//            userRoles.add(or.get());
-//        }
-//        newUser.setRoles(userRoles);
-//
-//        userRepos.save(newUser);
-//
-//        return "done";
-//    }
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
@@ -85,14 +57,10 @@ public class UserController {
         responseUserDto.setUserId(savedUser.getUserId());
         responseUserDto.setUsername(savedUser.getUsername());
         responseUserDto.setPassword(savedUser.getPassword());
-        //responseUserDto.setRoles(savedUser.getRoles().stream().map(Role::getRolename).collect(Collectors.toList()));
         responseUserDto.setRecipeDiary(savedUser.getRecipeDiary());
-
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUserDto);
     }
-
-
 
 
     @GetMapping("/{userId}")
@@ -104,7 +72,6 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
     @GetMapping("/credentials")
     public List<UserCredentialsDto> getAllUserCredentials() {
