@@ -2,7 +2,6 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
-import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoDto {
 

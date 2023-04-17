@@ -124,6 +124,12 @@ public class RecipeController extends BaseController {
         return ResponseEntity.ok(photoDto);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<RecipeDto>> searchRecipeByIngredient(@RequestParam("ingredient") String ingredientName) {
+        List<RecipeDto> recipeDtos = recipeService.searchRecipeByIngredient(ingredientName);
+        return ResponseEntity.ok(recipeDtos);
+    }
+
     @PatchMapping("/{recipeId}/notes")
     public ResponseEntity<Void> updateNotes(@PathVariable Long recipeId, @RequestBody Map<String, String> requestBody) {
         String newNotes = requestBody.get("notes");

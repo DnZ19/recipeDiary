@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends CrudRepository <Recipe, Long> {
 
-//    @Query("SELECT r FROM Recipe r LEFT JOIN FETCH r.photo p LEFT JOIN FETCH r.nutritionDetails WHERE r.recipeDiary.recipeDiaryId = :recipeDiaryId")
-//    List<Recipe> findAllRecipesByRecipeDiaryIdWithoutImageData(@Param("recipeDiaryId") Long recipeDiaryId);
+    List<Recipe> findAll();
+
 }

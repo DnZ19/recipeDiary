@@ -21,10 +21,6 @@ public class Photo {
     @JsonIgnore
     private byte[] imageData;
 
-    // Add a transient field for the Base64 encoded image
-//    @Transient
-//    private String base64ImageData;
-
     public Long getPhotoId() {
         return photoId;
     }

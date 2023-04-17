@@ -39,9 +39,6 @@ public class ShoppingListController extends BaseController {
 
     }
 
-//    @PutMapping("{shoppingListId}/{ingredientId}")
-
-
     @GetMapping("/{shoppingListId}")
     public  ResponseEntity<ShoppingListDto> getShoppingList(@PathVariable Long shoppingListId){
         ShoppingListDto sLdto = (ShoppingListDto) slService.getShoppingList(shoppingListId);

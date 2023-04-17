@@ -19,7 +19,6 @@ public class RecipeDto {
     public int rating;
     public String recipeSource;
     public String categoryName;
-//    public Long PhotoId;
 
     @JsonIgnore
     public List<Ingredient> ingredients;
@@ -97,11 +96,4 @@ public class RecipeDto {
         this.recipeDiary = recipeDiary;
     }
 
-//    public Long getPhotoId() {
-//        return PhotoId;
-//    }
-//
-//    public void setPhotoId(Long photoId) {
-//        PhotoId = photoId;
-//    }
 }
