@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.NutritionDetails;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
-
 import java.util.List;
 
 public class RecipeDto {

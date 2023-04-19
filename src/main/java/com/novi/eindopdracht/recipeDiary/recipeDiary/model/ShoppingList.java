@@ -1,7 +1,6 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.model;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +27,6 @@ public class ShoppingList {
 
     public Long getShoppingListId() {
         return shoppingListId;
-    }
-
-    public void setShoppingListId(Long shoppingListId) {
-        this.shoppingListId = shoppingListId;
     }
 
     public String getShoppingListName() {

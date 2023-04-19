@@ -5,10 +5,8 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundE
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.*;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {

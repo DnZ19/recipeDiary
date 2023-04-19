@@ -25,10 +25,6 @@ public class Photo {
         return photoId;
     }
 
-    public void setPhotoId(Long photoId) {
-        this.photoId = photoId;
-    }
-
     public String getDishName() {
         return dishName;
     }

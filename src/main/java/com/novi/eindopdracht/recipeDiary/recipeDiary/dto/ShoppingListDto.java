@@ -2,7 +2,6 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
-
 import java.util.List;
 
 public class ShoppingListDto {
@@ -18,16 +17,8 @@ public class ShoppingListDto {
     @JsonIgnore
     public Long ingredientId;
 
-    public Long getShoppingListId() {
-        return shoppingListId;
-    }
-
     public void setShoppingListId(Long shoppingListId) {
         this.shoppingListId = shoppingListId;
-    }
-
-    public String getShoppingListName() {
-        return shoppingListName;
     }
 
     public void setShoppingListName(String shoppingListName) {

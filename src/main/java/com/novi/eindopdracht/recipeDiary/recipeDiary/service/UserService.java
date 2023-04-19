@@ -5,7 +5,6 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Role;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.User;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
