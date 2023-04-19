@@ -1,6 +1,5 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 
 public class UserDto {
@@ -8,9 +7,7 @@ public class UserDto {
     public Long userId;
     public String username;
     public String password;
-
     public String[] roles;
-
     public RecipeDiary recipeDiary;
 
     public RecipeDiary getRecipeDiary() {
@@ -39,10 +36,6 @@ public class UserDto {
 
     public String[] getRoles() {
         return roles;
-    }
-
-    public void setRoles(String[] roles) {
-        this.roles = roles;
     }
 
     public Long getUserId() {

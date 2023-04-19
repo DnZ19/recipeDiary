@@ -4,7 +4,6 @@ import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Recipe;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.model.ShoppingList;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.IngredientRepository;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.repository.RecipeRepository;
 import org.springframework.stereotype.Service;

@@ -3,11 +3,8 @@ package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.*;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.*;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

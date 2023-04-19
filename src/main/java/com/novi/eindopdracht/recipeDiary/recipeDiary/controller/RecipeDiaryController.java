@@ -1,15 +1,12 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.controller;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.RecipeDiaryOverviewDto;
-import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.RecipeDiary;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryRecipesService;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.service.RecipeDiaryService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

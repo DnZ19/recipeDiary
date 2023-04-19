@@ -1,6 +1,5 @@
 package com.novi.eindopdracht.recipeDiary.recipeDiary.service;
 
-import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.IngredientDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.dto.ShoppingListDto;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.exception.ResourceNotFoundException;
 import com.novi.eindopdracht.recipeDiary.recipeDiary.model.Ingredient;

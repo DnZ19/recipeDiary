@@ -25,10 +25,6 @@ public class RecipeDiaryDto {
         this.user = user;
     }
 
-    public Long getRecipeDiaryId() {
-        return recipeDiaryId;
-    }
-
     public void setRecipeDiaryId(Long recipeDiaryId) {
         this.recipeDiaryId = recipeDiaryId;
     }

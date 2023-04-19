@@ -35,26 +35,6 @@ public class NutritionDetailsDto {
         this.carbs = carbs;
     }
 
-    public Long getNutritionDetailsId() {
-        return nutritionDetailsId;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public int getFat() {
-        return fat;
-    }
-
-    public int getProtein() {
-        return protein;
-    }
-
-    public int getCarbs() {
-        return carbs;
-    }
-
     public String getErrorMessage() {
         return errorMessage;
     }
